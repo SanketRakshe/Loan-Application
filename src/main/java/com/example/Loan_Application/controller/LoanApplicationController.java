@@ -1,7 +1,10 @@
 package com.example.Loan_Application.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +16,9 @@ import com.example.Loan_Application.proxy.ProductServiceProxy;
 
 @RestController
 public class LoanApplicationController {
-
+	
+	Logger logger = LoggerFactory.getLogger(LoanApplicationController.class);
+	
 	@Autowired
     private ProductServiceProxy productServiceProxy;
 
@@ -35,4 +40,21 @@ public class LoanApplicationController {
 
         return ResponseEntity.ok(response);
     }
+    
+    @GetMapping("/bad-request")
+    public String badRequest() {
+    	for(int i=0; i<1000; i++) {
+    		Product product = productServiceProxy.getProduct("BAD_Product");
+    		logger.info(product.toString() + "---->" + i);
+    	}
+    	
+    	return "done";
+    }
+    
+    
+    
+    
+    
+    
+    
 }

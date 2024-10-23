@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.Loan_Application.model.Product;
 
-@FeignClient(name="product-service", url="localhost:8000")
+//@FeignClient(name="product-service", url="localhost:8000")
+@FeignClient(name="product-service")
 public interface ProductServiceProxy {
 	@GetMapping("/product_info/{productName}")
 	public Product getProduct(@PathVariable String productName);
